@@ -1,19 +1,13 @@
-using MuJoCo
-using MuJoCo.PythonCall 
+using Revise
+using Underactuated 
 
-xml_path = joinpath(@__DIR__, "../src/models/simple_pendulum.xml")
+robot = create_robot(SimplePendulumType())
 
-model = mujoco.MjModel.from_xml_path(xml_path)
-data = mujoco.MjData(model)
-viewer = mujoco_viewer.MujocoViewer(model, data)
+Horizon = 5000
 
-for i=1:5000
-    if pyconvert(Bool, viewer.is_alive)
-        mujoco.mj_step(model, data)
-        viewer.render()
-    else
-        break 
-    end
+for _ = 1:Horizon
+    step(robot)
+    robot.viewer.render()
 end
 
-viewer.close()
+robot.viewer.close()

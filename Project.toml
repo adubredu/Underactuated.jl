@@ -5,6 +5,7 @@ version = "0.1.0"
 
 [deps]
 MuJoCo = "d144bad3-515b-4a7e-a9e1-688e504aa124"
+Revise = "295af30f-e4ad-537b-8983-00126c2a3abe"
 
 [compat]
 julia = "1"
