@@ -3,11 +3,14 @@ using Underactuated
 
 robot = create_robot(SimplePendulumType())
 
-Horizon = 10000
+Horizon = 5000
+ld = robot.length*cos(1.57)
+step(robot)
 
 for _ = 1:Horizon
+    τ = energy_shaping_controller(ld, robot)
+    apply_torque!(τ,  robot)
     step(robot)
-    @show get_generalized_coordinates(robot)
     robot.viewer.render()
 end
 

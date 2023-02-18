@@ -7,3 +7,14 @@ function create_robot(type::SimplePendulumType; visualize=true)
 
     return robot
 end 
+
+function get_generalized_coordinates(robot::SimplePendulum)
+    data = robot.data 
+    θ = pyconvert(Float64, data.joint("pin").qpos[0])
+    θ̇  = pyconvert(Float64, data.joint("pin").qvel[0])
+    return [θ, θ̇ ]
+end
+
+function apply_torque!(τ::Float64,  robot::SimplePendulum)   
+    robot.data.actuator("pin_torque").ctrl[0] = τ
+end

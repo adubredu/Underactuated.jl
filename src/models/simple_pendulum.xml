@@ -1,12 +1,12 @@
 <mujoco>
     <worldbody>
         <light diffuse=".5 .5 .5" pos="0 0 3" dir="0 0 -1"/> 
-        <body pos="0 0 1" euler="0 30 0">
-            <joint name="pin" type="hinge" axis="0 -1 0" pos="0 0 0.5" frictionloss="0.1"/>
+        <body pos="0 0 0" euler="0 0 0">
+            <joint name="pin" type="hinge" axis="0 1 0" pos="0 0 0.5" frictionloss="0.1" limited="true" range="-180 180"/>
             <geom type="cylinder" size="0.05 0.5" rgba="0.8 0 0.8 1" mass="1.0"/>
         </body>
     </worldbody>
     <actuator>
-        <motor joint="pin" name="torque" gear="1" ctrllimited="true" ctrlrange="-100 100"/>
+        <motor joint="pin" name="pin_torque" gear="1" ctrllimited="false" ctrlrange="-10000 10000"/>
     </actuator>
 </mujoco>
