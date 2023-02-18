@@ -3,6 +3,9 @@ uuid = "c1af1977-a9a4-4b74-a37a-08a084a183de"
 authors = ["Alphonsus Adu-Bredu"]
 version = "0.1.0"
 
+[deps]
+MuJoCo = "d144bad3-515b-4a7e-a9e1-688e504aa124"
+
 [compat]
 julia = "1"
 
