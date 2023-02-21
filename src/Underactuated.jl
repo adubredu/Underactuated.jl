@@ -3,7 +3,9 @@ module Underactuated
 using MuJoCo
 using MuJoCo.PythonCall
 using LinearAlgebra
-using ControlSystems
+using ControlSystems 
+using JuMP 
+using OSQP
 
 include("types.jl")
 include("step.jl")
@@ -13,6 +15,7 @@ include("robots/acrobot.jl")
 
 include("controllers/energy_shaping.jl")
 include("controllers/lqr.jl")
+include("controllers/convex_mpc.jl")
 
 # Robot types
 export SimplePendulumType,
@@ -31,6 +34,9 @@ export create_robot,
 
 # Controllers 
 export energy_shaping_controller,
-        lqr_controller
+        lqr_controller,
+        initialize_solver, 
+        build_QP,
+        convex_mpc_controller
 
 end

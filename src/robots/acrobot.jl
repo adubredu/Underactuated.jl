@@ -40,6 +40,6 @@ function get_linearized_dynamics(robot::Acrobot)
     return A, B     
 end
 
-function apply_torque_limits(robot::Acrobot, u::Float64; min_torque=-50, max_torque=50)
-    return clamp(u, min_torque, max_torque)
+function apply_torque_limits(robot::Acrobot, u::Float64)
+    return clamp(u, robot.τ_min, robot.τ_max)
 end

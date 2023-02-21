@@ -27,8 +27,13 @@ mutable struct Acrobot <: Robot
     viewer::Any
     visualize::Bool 
     xd::Vector{Float64} 
+    Nx::Int 
+    Nu::Int 
+    τ_min::Float64 
+    τ_max::Float64
     function Acrobot(model, data, viewer, visualize)
         xd=zeros(4) 
-        new(model, data, viewer, visualize, xd)
+        Nx = 4; Nu = 1; τ_min = -5e3; τ_max = 5e3
+        new(model, data, viewer, visualize, xd, Nx, Nu, τ_min, τ_max)
     end
 end
