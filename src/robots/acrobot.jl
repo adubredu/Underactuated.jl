@@ -19,6 +19,7 @@ end
 
 function get_linearized_dynamics(robot::Acrobot)
     θ₀ = [0.0, 0.0] 
+    robot.xd = [θ₀; zeros(2)] 
     robot.data.qpos[0] = θ₀[1]
     robot.data.qpos[1] = θ₀[2]
     robot.data.qacc = 0
@@ -37,4 +38,8 @@ function get_linearized_dynamics(robot::Acrobot)
     A = pyconvert(Matrix{Float64}, A_np)
     B = pyconvert(Matrix{Float64}, B_np)
     return A, B     
+end
+
+function apply_torque_limits(robot::Acrobot, u::Float64; min_torque=-50, max_torque=50)
+    return clamp(u, min_torque, max_torque)
 end

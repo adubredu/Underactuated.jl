@@ -2,8 +2,9 @@ using Revise
 using Underactuated 
 
 robot = create_robot(AcrobotType())
-
-Horizon = 1000
+robot.data.qpos[0] = π
+robot.data.qpos[1] = 2π
+Horizon = 500
 
 for _ = 1:Horizon
     step(robot)

@@ -6,7 +6,10 @@ version = "0.1.0"
 [deps]
 BenchmarkTools = "6e4b80f9-dd63-53aa-95a3-0cdb28fa8baf"
 ControlSystems = "a6e380b2-a6ca-5380-bf3e-84a91bcd477e"
+JuMP = "4076af6c-e467-56ae-b986-b466b2749572"
+LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
 MuJoCo = "d144bad3-515b-4a7e-a9e1-688e504aa124"
+OSQP = "ab2f91bb-94b4-55e3-9ba0-7f65df51de79"
 Revise = "295af30f-e4ad-537b-8983-00126c2a3abe"
 
 [compat]
