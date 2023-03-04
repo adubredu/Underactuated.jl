@@ -12,10 +12,7 @@ include("step.jl")
 
 include("robots/simple_pendulum.jl")
 include("robots/acrobot.jl")
-
-include("controllers/energy_shaping.jl")
-include("controllers/lqr.jl")
-include("controllers/convex_mpc.jl")
+ 
 
 # Robot types
 export SimplePendulumType,
@@ -32,11 +29,5 @@ export create_robot,
        apply_torque!,
        get_linearized_dynamics
 
-# Controllers 
-export energy_shaping_controller,
-        lqr_controller,
-        initialize_solver, 
-        build_QP,
-        convex_mpc_controller
-
+ 
 end
