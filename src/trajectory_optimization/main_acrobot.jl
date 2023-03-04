@@ -21,5 +21,5 @@ T = 5.0 # seconds
 robot = RobotZoo.Acrobot()
 
 
-xtraj, utraj, Thist = compute_trajectory(x0, xgoal, robot, T)
+xtraj, utraj, Thist, Nsteps = compute_trajectory(x0, xgoal, robot, T)
 visualize_acrobot_trajectory(robot, xtraj, utraj, Thist)

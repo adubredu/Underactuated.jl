@@ -25,8 +25,8 @@ function compute_trajectory(x0, xgoal, robot, T; h=0.1, qcost=1.0, rcost=0.1)
     Q = Diagonal(qcost*ones(Nx))
     R = rcost
 
+    #Hermite-Simpson integration with first-order hold on u
     function dircol_dynamics(z...)
-        #Hermite-Simpson integration with first-order hold on u
         x1=collect(z[1:Nx]) 
         u1=collect(z[(Nx+1):(Nx+Nu)]) 
         x2=collect(z[(Nx+Nu)+1 : (Nx+Nu)+Nx]) 
@@ -79,5 +79,5 @@ function compute_trajectory(x0, xgoal, robot, T; h=0.1, qcost=1.0, rcost=0.1)
     optimize!(model)
     xtraj = value.(x)
     utraj = value.(u)
-    return xtraj, utraj, Thist
+    return xtraj, utraj, Thist, Nsteps
 end
