@@ -158,8 +158,7 @@ mode = :stance
 stance_indices = []; flight_indices = []; jump_indices = [];
 for i=1:Nt-1 
     global counter += 1 
-    global mode
-    # @show counter, mode
+    global mode 
     if mode == :stance   
         @NLconstraint(model, x[1, i+1] == s1(x[1, i], x[2, i], x[3, i], x[4, i], x[5, i], x[6, i], x[7, i], x[8, i], u[1, i], u[2, i]))
         @NLconstraint(model, x[2, i+1] == s2(x[1, i], x[2, i], x[3, i], x[4, i], x[5, i], x[6, i], x[7, i], x[8, i], u[1, i], u[2, i]))
@@ -200,70 +199,6 @@ for i=1:Nt-1
         counter = 0
     end 
 end
-
-
-# for k=1:(Nmodes-1)
-#     if mod(k,2) == 1
-#         for j=1:Nm 
-#             s = (k-1)*Nm + j  
-#             @NLconstraint(model, x[1, s+1] == s1(x[1, s], x[2, s], x[3, s], x[4, s], x[5, s], x[6, s], x[7, s], x[8, s], u[1, s], u[2, s]))
-#             @NLconstraint(model, x[2, s+1] == s2(x[1, s], x[2, s], x[3, s], x[4, s], x[5, s], x[6, s], x[7, s], x[8, s], u[1, s], u[2, s]))
-#             @NLconstraint(model, x[3, s+1] == s3(x[1, s], x[2, s], x[3, s], x[4, s], x[5, s], x[6, s], x[7, s], x[8, s], u[1, s], u[2, s]))
-#             @NLconstraint(model, x[4, s+1] == 0.0)#s4(x[1, s], x[2, s], x[3, s], x[4, s], x[5, s], x[6, s], x[7, s], x[8, s], u[1, s], u[2, s]))
-#             @NLconstraint(model, x[5, s+1] == s5(x[1, s], x[2, s], x[3, s], x[4, s], x[5, s], x[6, s], x[7, s], x[8, s], u[1, s], u[2, s]))
-#             @NLconstraint(model, x[6, s+1] == s6(x[1, s], x[2, s], x[3, s], x[4, s], x[5, s], x[6, s], x[7, s], x[8, s], u[1, s], u[2, s]))
-#             @NLconstraint(model, x[7, s+1] == s7(x[1, s], x[2, s], x[3, s], x[4, s], x[5, s], x[6, s], x[7, s], x[8, s], u[1, s], u[2, s]))
-#             @NLconstraint(model, x[8, s+1] == s8(x[1, s], x[2, s], x[3, s], x[4, s], x[5, s], x[6, s], x[7, s], x[8, s], u[1, s], u[2, s]))
-#             # @NLconstraint(model, x[4, s] == 0.0)
-#         end
-#     else
-#         for j=(Nm-1)
-#             s = (k-1)*Nm + j 
-#             @NLconstraint(model, x[1, s+1] == f1(x[1, s], x[2, s], x[3, s], x[4, s], x[5, s], x[6, s], x[7, s], x[8, s], u[1, s], u[2, s]))
-#             @NLconstraint(model, x[2, s+1] == f2(x[1, s], x[2, s], x[3, s], x[4, s], x[5, s], x[6, s], x[7, s], x[8, s], u[1, s], u[2, s]))
-#             @NLconstraint(model, x[3, s+1] == f3(x[1, s], x[2, s], x[3, s], x[4, s], x[5, s], x[6, s], x[7, s], x[8, s], u[1, s], u[2, s]))
-#             @NLconstraint(model, x[4, s+1] == f4(x[1, s], x[2, s], x[3, s], x[4, s], x[5, s], x[6, s], x[7, s], x[8, s], u[1, s], u[2, s]))
-#             @NLconstraint(model, x[5, s+1] == f5(x[1, s], x[2, s], x[3, s], x[4, s], x[5, s], x[6, s], x[7, s], x[8, s], u[1, s], u[2, s]))
-#             @NLconstraint(model, x[6, s+1] == f6(x[1, s], x[2, s], x[3, s], x[4, s], x[5, s], x[6, s], x[7, s], x[8, s], u[1, s], u[2, s]))
-#             @NLconstraint(model, x[7, s+1] == f7(x[1, s], x[2, s], x[3, s], x[4, s], x[5, s], x[6, s], x[7, s], x[8, s], u[1, s], u[2, s]))
-#             @NLconstraint(model, x[8, s+1] == f8(x[1, s], x[2, s], x[3, s], x[4, s], x[5, s], x[6, s], x[7, s], x[8, s], u[1, s], u[2, s]))
-#         end
-#         s = k*Nm 
-#         @NLconstraint(model, x[1, s+1] == j1(x[1, s], x[2, s], x[3, s], x[4, s], x[5, s], x[6, s], x[7, s], x[8, s], u[1, s], u[2, s]))
-#         @NLconstraint(model, x[2, s+1] == j2(x[1, s], x[2, s], x[3, s], x[4, s], x[5, s], x[6, s], x[7, s], x[8, s], u[1, s], u[2, s]))
-#         @NLconstraint(model, x[3, s+1] == j3(x[1, s], x[2, s], x[3, s], x[4, s], x[5, s], x[6, s], x[7, s], x[8, s], u[1, s], u[2, s]))
-#         @NLconstraint(model, x[4, s+1] == j4(x[1, s], x[2, s], x[3, s], x[4, s], x[5, s], x[6, s], x[7, s], x[8, s], u[1, s], u[2, s]))
-#         @NLconstraint(model, x[5, s+1] == j5(x[1, s], x[2, s], x[3, s], x[4, s], x[5, s], x[6, s], x[7, s], x[8, s], u[1, s], u[2, s]))
-#         @NLconstraint(model, x[6, s+1] == j6(x[1, s], x[2, s], x[3, s], x[4, s], x[5, s], x[6, s], x[7, s], x[8, s], u[1, s], u[2, s]))
-#         @NLconstraint(model, x[7, s+1] == j7(x[1, s], x[2, s], x[3, s], x[4, s], x[5, s], x[6, s], x[7, s], x[8, s], u[1, s], u[2, s]))
-#         @NLconstraint(model, x[8, s+1] == j8(x[1, s], x[2, s], x[3, s], x[4, s], x[5, s], x[6, s], x[7, s], x[8, s], u[1, s], u[2, s]))
-#     end
-# end
-# if mod(Nmodes, 2) == 1
-#     for j=1:(Nm-1)
-#         s = (Nmodes-1)*Nm + j
-#         @NLconstraint(model, x[1, s+1] == s1(x[1, s], x[2, s], x[3, s], x[4, s], x[5, s], x[6, s], x[7, s], x[8, s], u[1, s], u[2, s]))
-#         @NLconstraint(model, x[2, s+1] == s2(x[1, s], x[2, s], x[3, s], x[4, s], x[5, s], x[6, s], x[7, s], x[8, s], u[1, s], u[2, s]))
-#         @NLconstraint(model, x[3, s+1] == s3(x[1, s], x[2, s], x[3, s], x[4, s], x[5, s], x[6, s], x[7, s], x[8, s], u[1, s], u[2, s]))
-#         @NLconstraint(model, x[4, s+1] == 0.0) #s4(x[1, s], x[2, s], x[3, s], x[4, s], x[5, s], x[6, s], x[7, s], x[8, s], u[1, s], u[2, s]))
-#         @NLconstraint(model, x[5, s+1] == s5(x[1, s], x[2, s], x[3, s], x[4, s], x[5, s], x[6, s], x[7, s], x[8, s], u[1, s], u[2, s]))
-#         @NLconstraint(model, x[6, s+1] == s6(x[1, s], x[2, s], x[3, s], x[4, s], x[5, s], x[6, s], x[7, s], x[8, s], u[1, s], u[2, s]))
-#         @NLconstraint(model, x[7, s+1] == s7(x[1, s], x[2, s], x[3, s], x[4, s], x[5, s], x[6, s], x[7, s], x[8, s], u[1, s], u[2, s]))
-#         @NLconstraint(model, x[8, s+1] == s8(x[1, s], x[2, s], x[3, s], x[4, s], x[5, s], x[6, s], x[7, s], x[8, s], u[1, s], u[2, s]))
-#     end 
-# else
-#     for j=1:(Nm-1)
-#         s = (Nmodes-1)*Nm + j 
-#         @NLconstraint(model, x[1, s+1] == f1(x[1, s], x[2, s], x[3, s], x[4, s], x[5, s], x[6, s], x[7, s], x[8, s], u[1, s], u[2, s]))
-#         @NLconstraint(model, x[2, s+1] == f2(x[1, s], x[2, s], x[3, s], x[4, s], x[5, s], x[6, s], x[7, s], x[8, s], u[1, s], u[2, s]))
-#         @NLconstraint(model, x[3, s+1] == f3(x[1, s], x[2, s], x[3, s], x[4, s], x[5, s], x[6, s], x[7, s], x[8, s], u[1, s], u[2, s]))
-#         @NLconstraint(model, x[4, s+1] == f4(x[1, s], x[2, s], x[3, s], x[4, s], x[5, s], x[6, s], x[7, s], x[8, s], u[1, s], u[2, s]))
-#         @NLconstraint(model, x[5, s+1] == f5(x[1, s], x[2, s], x[3, s], x[4, s], x[5, s], x[6, s], x[7, s], x[8, s], u[1, s], u[2, s]))
-#         @NLconstraint(model, x[6, s+1] == f6(x[1, s], x[2, s], x[3, s], x[4, s], x[5, s], x[6, s], x[7, s], x[8, s], u[1, s], u[2, s]))
-#         @NLconstraint(model, x[7, s+1] == f7(x[1, s], x[2, s], x[3, s], x[4, s], x[5, s], x[6, s], x[7, s], x[8, s], u[1, s], u[2, s]))
-#         @NLconstraint(model, x[8, s+1] == f8(x[1, s], x[2, s], x[3, s], x[4, s], x[5, s], x[6, s], x[7, s], x[8, s], u[1, s], u[2, s]))
-#     end
-# end 
 
 for i=1:Nt 
     @NLconstraint(model, ℓ_min ≤ dist(x[1, i] - x[3, i], x[2, i]-x[4, i]) ≤ ℓ_max)
